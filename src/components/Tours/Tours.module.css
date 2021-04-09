@@ -1,0 +1,120 @@
+.tourCard,
+.tourOrganizerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--primaryFontColor);
+  margin: 10px 10px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px #000000;
+  width: 300px;
+  color: var(--titleColor);
+  font-size: var(--regularFontSize);
+}
+
+.tourCard img {
+  width: 100%;
+  height: 200px;
+}
+
+#tourOperator {
+  border-top: solid 1px var(--primaryColor);
+  background-color: var(--tertiaryColor);
+  border-bottom: solid 1px var(--primaryColor);
+  color: var(--titleColor);
+  padding: 5px;
+  font-size: var(--titleFontSize);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-right: solid 1px var(--primaryColor);
+  background-color: var(--secondaryColor);
+  color: var(--primaryFontColor);
+  height: 40px;
+}
+
+#lastRow {
+  border-bottom: solid 1px var(--primaryColor);
+  font-size: var(--regularFontSize);
+}
+
+#timeCell {
+  border-bottom: solid 1px var(--primaryColor);
+}
+
+.toursContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-around;
+}
+
+.tertiaryTag {
+  width: inherit;
+  font-size: var(--regularFontSize);
+  padding: 5px 10px;
+}
+
+.tourOrganizerCard img {
+  width: 100%;
+  height: 250px;
+}
+
+.organizerTitle {
+  height: 50px;
+  font-size: var(--mainTitleFontSize);
+  font-weight: bold;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: var(--tertiaryColor);
+  margin-bottom: 10px;
+}
+
+.input {
+  height: 40px;
+  margin: 10px 10px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.selectInput {
+  height: 40px;
+  margin: 0px 30px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-self: flex-end;
+}
+
+.warningMessage {
+  display: block;
+  color: var(--alarmMessageColor);
+  font-size: large;
+  text-align: center;
+}
+/***************************Responsiveness for phones**************************/
+
+@media only screen and (max-width: 420px) {
+  #tourCard {
+    width: 300px;
+  }
+
+  #tourCard h3 {
+    font-size: 16px;
+  }
+
+  #tourCard h4 {
+    font-size: 14px;
+  }
+}

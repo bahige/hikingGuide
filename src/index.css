@@ -1,13 +1,47 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+* {
+  overflow-x: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --primaryColor: #239b56;
+  --secondaryColor: #28b463;
+  --tertiaryColor: #82e0aa;
+  --primaryFontColor: #fff;
+  --primaryColorHover: #1d8348;
+  --primaryFontColorHover: rgb(255, 255, 50);
+  --registerButtonColor: #e67e22;
+  --registerButtonColorHover: #d35400;
+  --formLabelColor: #808080;
+  --secondaryFontColor: #808080;
+  --alarmMessageColor: #d30000;
+  --titleColor: #000000;
+  --toursBackgroundColor: #fcf3cf;
+
+  --mainTitleFontSize: 18px;
+  --titleFontSize: 14px;
+  --regularFontSize: 12px;
+  --smallFontSize: 10px;
+  --smallerFontSize: 8px;
+  --labelFontSize: 13px;
+  --labelTitleFontSize: 24px;
+}
+
+.alarm {
+  color: var(--alarmMessageColor);
+  font-size: 10px;
+  align-self: flex-start;
+  margin-left: 30px;
+  margin-bottom: 12px;
 }

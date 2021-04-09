@@ -1,0 +1,145 @@
+.singleTourRow {
+  width: 95vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: black solid 1px;
+  margin: 5px auto;
+  border-radius: 5px;
+}
+
+.cell,
+.singleTourRow span:not(:last-child) {
+  width: 20%;
+  margin: 0 5px;
+  text-align: center;
+}
+
+.singleTourRow span:not(:last-child) {
+  text-decoration: underline;
+  font-size: var(--mainTitleFontSize);
+  font-weight: bold;
+}
+
+.singleTourRow span:last-child {
+  width: 15%;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.deleteButton {
+  background-color: var(--alarmMessageColor);
+  padding: 10px;
+  color: var(--primaryFontColor);
+  border: none;
+  border-radius: 5px;
+  flex: 1;
+  margin: 5px;
+}
+
+.editButton {
+  background-color: var(--secondaryColor);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: var(--primaryFontColor);
+  flex: 1;
+  margin: 5px;
+}
+
+.createButtonRow {
+  width: 95vw;
+  height: auto;
+  padding: 10px;
+  margin: 5px auto;
+}
+
+.createButton {
+  background-color: var(--secondaryColor);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: var(--primaryFontColor);
+  margin: 5px;
+}
+
+:is(.createButton, .editButton, .deleteButton):hover {
+  cursor: pointer;
+}
+
+.modal {
+  height: 150px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.infoDetails {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex: 1;
+  background-color: var(--primaryColor);
+  color: var(--primaryFontColor);
+  font-size: var(--mainTitleFontSize);
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.infoDetails div {
+  padding-left: 20px;
+}
+
+.infoDetails div:first-of-type {
+  align-self: center;
+}
+
+.singleTourRow img {
+  width: 400px;
+}
+
+.initialRow div {
+  text-align: center;
+  width: 20%;
+}
+
+.btn {
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  background-color: var(--registerButtonColor);
+  color: var(--primaryFontColor);
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  align-self: center;
+}
+
+.filterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  background-color: var(--tertiaryColor);
+  margin-bottom: 10px;
+}
+
+.input {
+  height: 40px;
+  margin: 10px 10px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

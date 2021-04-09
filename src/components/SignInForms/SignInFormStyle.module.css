@@ -1,0 +1,103 @@
+.container {
+  background-image: url("../../assets/images/background.jpg");
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--primaryFontColor);
+  margin: 10px 10px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  /* flex-basis: 50%; */
+  min-width: 400px;
+}
+
+.input {
+  width: 80%;
+  height: 40px;
+  margin: 10px 10px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  background-color: var(--primaryColor);
+  color: var(--primaryFontColor);
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#regBtn {
+  background-color: var(--registerButtonColor);
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: var(--primaryColorHover);
+}
+
+#regBtn:hover,
+#regBtn:focus {
+  background-color: var(--registerButtonColorHover);
+}
+
+a {
+  color: var(--primaryColor);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  font-size: 150px;
+  background-color: var(--primaryColor);
+  width: 100%;
+  color: var(--primaryFontColor);
+  padding: 10px 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+hr {
+  background-color: #d3d3d3;
+  opacity: 0.5;
+  width: 50%;
+  margin: 10px 0;
+}
+
+/***************************Responsiveness for tablets**************************/
+
+@media only screen and (max-width: 800px) {
+  .form {
+    min-width: 350px;
+  }
+}
+
+/***************************Responsiveness for phones**************************/
+
+@media only screen and (max-width: 420px) {
+  .form {
+    min-width: 300px;
+  }
+}

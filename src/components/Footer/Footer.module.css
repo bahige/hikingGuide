@@ -1,0 +1,87 @@
+.mainContainer {
+  background-color: var(--primaryColor);
+  color: var(--primaryFontColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.firstRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.col1,
+.col2,
+.col3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  flex: 1;
+  height: auto;
+}
+
+.mainContainer hr {
+  width: 100vw;
+  margin: 5px 200px;
+}
+
+.imgRow {
+  display: flex;
+  width: 100%;
+}
+
+.col1 img {
+  width: 180px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.col1 img:hover {
+  cursor: pointer;
+}
+
+.col1 h3,
+.col1 p {
+  width: 100%;
+  text-align: start;
+}
+
+:is(.col1, .col3) h3 {
+  text-decoration: underline;
+}
+
+.col2 img {
+  width: 150px;
+  margin: 10px 0;
+}
+
+.col3 p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--primaryFontColorHover);
+}
+
+/***************************Responsiveness for phones**************************/
+
+@media only screen and (max-width: 420px) {
+  .firstRow {
+    flex-direction: column;
+  }
+
+  .imgRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col1,
+  .col2,
+  .col3 {
+    height: auto;
+    margin: 10px;
+  }
+}

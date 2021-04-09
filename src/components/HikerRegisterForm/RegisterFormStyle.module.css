@@ -1,0 +1,191 @@
+.hikerRegContainer {
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("../../assets/images/background1.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.orgRegContainer {
+  width: 100vw;
+  min-height: 130vh;
+  background-image: url("../../assets/images/background2.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 400px;
+  height: 500px;
+  background-color: var(--primaryFontColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 20px 0;
+}
+
+#regForm {
+  height: auto;
+}
+
+.input {
+  width: 80%;
+  height: 40px;
+  margin: 5px 10px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input:first-child {
+  margin-top: 20px;
+}
+
+.btn {
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  background-color: var(--primaryColor);
+  color: var(--primaryFontColor);
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.label {
+  font-size: var(--labelFontSize);
+  color: var(--formLabelColor);
+  align-self: start;
+  margin-left: 30px;
+}
+
+.dateContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 120px;
+  width: 85%;
+  font-size: 13px;
+}
+
+.basicSelect {
+  height: 40 px;
+  width: 85%;
+  font-size: 13px;
+}
+
+.govSelectContainer {
+  width: 100%;
+}
+
+.selectInput {
+  width: 85%;
+  height: 40px;
+  margin: 0px 30px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkbox {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 8px 0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.checkbox label {
+  margin: unset;
+  margin: 0 10px;
+}
+
+.textarea {
+  width: 85%;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+}
+
+.btnContainer {
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btnNext,
+.btnBack {
+  width: 200px;
+  margin: 10px 5px;
+  background-color: var(--primaryColor);
+  color: var(--primaryFontColor);
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+}
+
+:is(.btnBack, .btnNext):hover {
+  cursor: pointer;
+}
+
+.btnContainer :first-child {
+  background-color: var(--registerButtonColor);
+}
+
+#backButton {
+  background-color: var(--registerButtonColor);
+  text-align: center;
+  line-height: 40px;
+}
+
+.tourForm {
+  display: inline-block;
+  width: 400px;
+  height: 500px;
+  /* position: relative; */
+  overflow: hidden;
+  background-color: blueviolet;
+  border-radius: 10px;
+}
+
+.subform {
+  position: absolute;
+}
+
+.icon {
+  font-size: var(--labelTitleFontSize);
+  background-color: var(--primaryColor);
+  width: 100%;
+  color: var(--primaryFontColor);
+  padding: 10px 0;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  top: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

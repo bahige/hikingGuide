@@ -1,0 +1,23 @@
+.page-item {
+  display: inline-block;
+  border: 1px solid var(--primaryColor);
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--primaryColor);
+  font-weight: bold;
+}
+
+.page-item:hover,
+.active {
+  background: var(--primaryColor);
+  color: var(--primaryFontColor);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
