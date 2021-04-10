@@ -32,9 +32,8 @@ const ToursListPerOrganizer = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(organizer){
-        dispatch(listToursByOrganizer(searchKeyword));}
-    }, [successDelete, organizer, searchKeyword]);
+        // if(organizer){
+        dispatch(listToursByOrganizer(searchKeyword));}, [successDelete, organizer, searchKeyword]);
 
 
 

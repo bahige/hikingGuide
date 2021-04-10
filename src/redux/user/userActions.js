@@ -2,10 +2,11 @@ import axios from "axios"
 import { SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNIN_USER_FAILURE, SIGNOUT_USER, 
         REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
          LIST_USERS_REQUEST, LIST_USERS_SUCCESS, LIST_USERS_FAILURE, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAILURE, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE } from "./userActionTypes"
-import {authHeader} from '../authHeader';
-import Cookie from 'js-cookie';
+import Cookies from 'universal-cookie';
 
-const url = "http://localhost:3200/users";
+const url = "http://localhost:3400/users";
+const cookies = new Cookies();
+
 
 
 export const signinUserRequest = (email, password) => {
@@ -21,11 +22,12 @@ export const signinUserFailure= (error) => {
 }
 
 export const signinUser = (email, password) => async(dispatch) => {
+    dispatch(signinUserRequest(email, password));
     try{
-        dispatch(signinUserRequest(email, password));
-        const {data} = await axios.post(`${url}/signin`, { email, password });
+        const {data} = await axios.post(`${url}/signin`, { email, password }, {withCredentials:true});
         dispatch(signinUserSuccess(data));
-        Cookie.setItem("userInfo", JSON.stringify(data));
+        cookies.set("userInfo", JSON.stringify(data));
+        console.log('userInfo', cookies.get('userInfo'));
     }
     catch(err){
         dispatch(signinUserFailure(err));
@@ -48,9 +50,11 @@ export const registerUserFailure = (error) => {
 
 export const registerUser =   (firstName, lastName, email, password, age, gender) => async (dispatch) => {
     try{ dispatch(registerUserRequest(firstName, lastName, email, password, age, gender));
-        const {data} = await axios.post(`${url}/register`, {firstName, lastName, email, password, age, gender});
+        const {data} = await axios.post(`${url}/register`, 
+        {firstName, lastName, email, password, age, gender},
+        {withCredentials:true});
         dispatch(registerUserSuccess(data));
-        Cookie.setItem('userInfo', JSON.stringify(data));
+        cookies.set("userInfo", JSON.stringify(data));
     }
     catch(err){
         dispatch(registerUserFailure(err));
@@ -60,7 +64,7 @@ export const registerUser =   (firstName, lastName, email, password, age, gender
 /***************************************SignOut Users ***********************************************/
 
 export const signOutUser = () => (dispatch)  => {
-    localStorage.removeItem("userInfo");
+    cookies.remove("userInfo");
     dispatch({type: SIGNOUT_USER});
 }
 
@@ -88,7 +92,7 @@ export const listUsers = (page = 1, limit =4) => async (dispatch, getState) => {
         const {signinUser : {userInfo}} = getState();
         dispatch(listUsersRequest());
         const {data} = await axios.get(`${url}?page=${page}&limit=${limit}`,
-         { headers:{ Authorization: `Bearer ${userInfo.token}` },});
+         { headers:{ Authorization: "Bearer " + userInfo.token },});
         dispatch(listUsersSuccess(data))
     }catch(error){
         dispatch(listUsersFailure(error));
@@ -114,7 +118,7 @@ export const deleteUser = (userId) => async (dispatch, getState)=> {
         const {signinUser : {userInfo}} = getState();
         dispatch(deleteUserRequest(userId));
         const data = await axios.delete(`${url}/${userId}`,
-         {headers: {Authentication : `Bearer ${userInfo.token}`}});
+         {headers: {Authorization : "Bearer " + userInfo.token}});
          dispatch(deleteUserSuccess(data));
          console.log("userData", data);
          
@@ -144,9 +148,9 @@ async (dispatch, getState) => {
         dispatch(updateUserRequest({userId, firstName, lastName, email, password, age, gender}));
         const data = await axios.patch(`${url}/${userId}`, 
         {userId, firstName, lastName, email, password, age, gender}, 
-        {headers: {Authorization : `Bearer ${userInfo.token}`}});
+        {headers: {Authorization : "Bearer " + userInfo.token}, withCredentials:true});
         dispatch(updateUserSuccess(data));
-        Cookie.setItem('userInfo', JSON.stringify(data));
+        cookies.set("userInfo", JSON.stringify(data));
 
     }catch(err){
         dispatch(updateUserFailure(err));

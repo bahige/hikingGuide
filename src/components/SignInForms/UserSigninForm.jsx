@@ -100,8 +100,8 @@ const SignInForm = (props) => {
                     </Link>
                 </div>
                 <hr/>
-                <button type="submit" id={SignInFormStyle.regBtn}
-                className={SignInFormStyle.btn} onClick={handleClick}> Register As {type}</button>
+                <button type="submit" className={`${SignInFormStyle.regBtn} ${SignInFormStyle.btn}`}
+                onClick={handleClick}> Register As {type}</button>
             </form>
         </div>
     )

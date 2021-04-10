@@ -5,7 +5,7 @@ import {TOURS_LIST_REQUEST, TOURS_LIST_SUCCESS, TOURS_LIST_FAILURE,
      from '../tour/tourActionTypes';
 import {authHeader, userAuthHeader, orgAuthHeader} from '../authHeader';
 
-const url = "http://localhost:3200/tours";
+const url = "http://localhost:3400/tours";
 
 
 ////////////////////////////////////////Fetch All Tours////////////////////////////////////////
@@ -87,11 +87,11 @@ export const createOrUpdateTour = (tour) => async (dispatch, getState) =>{
         dispatch(createOrUpdateTourRequest(tour));
         if(!tour._id){
         const {data} = await axios.post(url, tour, 
-            { headers: `Bearer ${orgInfo.token}`});
+            { headers: "Bearer " + orgInfo.token});
             dispatch(createOrUpdateTourSuccess(data));
         } else {
             const {data} = await axios.patch(`${url}/${tour._id}`, tour, 
-            { headers: `Bearer ${orgInfo.token}`});
+            { headers: "Bearer " + orgInfo.token});
             dispatch(createOrUpdateTourSuccess(data))
         }
 
@@ -120,7 +120,7 @@ export const deleteTourByAdmin = (tourId) => async (dispatch, getState) => {
         const {userSignin: {userInfo}} = getState();
         dispatch(deleteTourByAdminRequest(tourId));
         const data = await axios.delete(`${url}/${tourId}`, 
-        {headers: {Authorization : `Bearer ${userInfo.token}`}});
+        {headers: {Authorization : "Bearer " + userInfo.token}});
         dispatch(deleteTourByAdminSuccess(data));
     }catch(err){
         dispatch(deleteTourByAdminFailure(err))
@@ -146,7 +146,7 @@ export const addHikerToTour = (tourId) => async (dispatch, getState) => {
       const {userSignin: {userInfo}} = getState();
       dispatch(addHikerToTourRequest());
       const { data } = await axios.post(`${url}/${tourId}/hikers`,  
-      {headers: {Authorization : `Bearer ${userInfo.token}`}});
+      {headers: {Authorization : "Bearer " + userInfo.token}});
       dispatch(addHikerToTourSuccess(data));
     } catch (error) {
       dispatch( addHikerToTourFailure(error));
@@ -182,7 +182,7 @@ export const listToursByOrganizer = (searchKeyWord="", page = 1, limit =5) => as
         const {orgSignin : {orgInfo}} = getState();
         dispatch(fetchToursRequestByOrganizer());
         const { data } = await axios.get(`${url}/myTours?searchKeyword=${searchKeyWord}&page=${page}&limit=${limit}`, 
-        {headers: {Authorization : `Bearer ${orgInfo.token}`}}
+        {headers: {Authorization : "Bearer " + orgInfo.token}}
         );
         dispatch(fetchToursSuccessByOrganizer(data));
       } catch (error) {
@@ -209,7 +209,7 @@ export const deleteTourByTourOrganizer = (tourId) => async (dispatch, getState) 
         const {orgSignin : {orgInfo}} = getState();
         dispatch(deleteTourByTourOrganizerRequest(tourId));
         const data = await axios.delete(`${url}/tourOrg/${tourId}`, 
-        {headers: {Authorization : `Bearer ${orgInfo.token}`}});
+        {headers: {Authorization : "Bearer " + orgInfo.token}});
         dispatch(deleteTourByTourOrganizerSuccess(data));
     }catch(err){
         dispatch(deleteTourByTourOrganizerFailure(err))

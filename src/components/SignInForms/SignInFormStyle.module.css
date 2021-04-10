@@ -44,7 +44,7 @@
   font-weight: bold;
 }
 
-#regBtn {
+.regBtn {
   background-color: var(--registerButtonColor);
 }
 
