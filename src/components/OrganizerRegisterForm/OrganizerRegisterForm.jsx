@@ -39,6 +39,11 @@ const OrganizerRegisterForm = () => {
     const history = useHistory();
 
 
+    useEffect(() => {
+      if(organizer){
+        history.push('/tours');
+    } 
+    }, [organizer])
     
     //////////////////////////////////////////////////////Validating methods////////////////////////////////////////////////////// 
 
@@ -137,11 +142,6 @@ const submitHandler = (e) => {
     e.preventDefault();
     dispatch(registerOrganizer(name, image, email, password, street, city, 
       district, governorate, phoneNr, contactName));
-      if(organizer){
-        history.push('/tours');
-    } else {
-        history.push('/'); 
-    }
   };
 
     return (

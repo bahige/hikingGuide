@@ -2,11 +2,10 @@ import axios from "axios"
 import { SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNIN_USER_FAILURE, SIGNOUT_USER, 
         REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
          LIST_USERS_REQUEST, LIST_USERS_SUCCESS, LIST_USERS_FAILURE, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAILURE, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE } from "./userActionTypes"
-import Cookies from 'universal-cookie';
+import {authHeader, userAuthHeader} from '../authHeader';
+
 
 const url = "http://localhost:3400/users";
-const cookies = new Cookies();
-
 
 
 export const signinUserRequest = (email, password) => {
@@ -26,8 +25,7 @@ export const signinUser = (email, password) => async(dispatch) => {
     try{
         const {data} = await axios.post(`${url}/signin`, { email, password }, {withCredentials:true});
         dispatch(signinUserSuccess(data));
-        cookies.set("userInfo", JSON.stringify(data));
-        console.log('userInfo', cookies.get('userInfo'));
+        localStorage.setItem("userInfo", JSON.stringify(data));
     }
     catch(err){
         dispatch(signinUserFailure(err));
@@ -54,7 +52,7 @@ export const registerUser =   (firstName, lastName, email, password, age, gender
         {firstName, lastName, email, password, age, gender},
         {withCredentials:true});
         dispatch(registerUserSuccess(data));
-        cookies.set("userInfo", JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(data));
     }
     catch(err){
         dispatch(registerUserFailure(err));
@@ -64,7 +62,8 @@ export const registerUser =   (firstName, lastName, email, password, age, gender
 /***************************************SignOut Users ***********************************************/
 
 export const signOutUser = () => (dispatch)  => {
-    cookies.remove("userInfo");
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("persistantState");
     dispatch({type: SIGNOUT_USER});
 }
 
@@ -87,12 +86,11 @@ export const listUsersFailure = (error) => {
     return {type: LIST_USERS_FAILURE, payload:error};
 }
 
-export const listUsers = (page = 1, limit =4) => async (dispatch, getState) => {
+export const listUsers = (page = 1, limit =4) => async (dispatch) => {
     try{ 
-        const {signinUser : {userInfo}} = getState();
         dispatch(listUsersRequest());
         const {data} = await axios.get(`${url}?page=${page}&limit=${limit}`,
-         { headers:{ Authorization: "Bearer " + userInfo.token },});
+         { headers:authHeader()});
         dispatch(listUsersSuccess(data))
     }catch(error){
         dispatch(listUsersFailure(error));
@@ -113,14 +111,12 @@ export const deleteUserFailure =(error) => {
     return {type: DELETE_USER_FAILURE, payload: error}
 }
 
-export const deleteUser = (userId) => async (dispatch, getState)=> {
+export const deleteUser = (userId) => async (dispatch)=> {
     try{ 
-        const {signinUser : {userInfo}} = getState();
         dispatch(deleteUserRequest(userId));
         const data = await axios.delete(`${url}/${userId}`,
-         {headers: {Authorization : "Bearer " + userInfo.token}});
+         {headers: userAuthHeader()});
          dispatch(deleteUserSuccess(data));
-         console.log("userData", data);
          
     } catch(err){
         dispatch(deleteUserFailure(err));
@@ -142,15 +138,14 @@ export const updateUserFailure = (error) => {
 }
 
 export const updateUser = ({userId, firstName, lastName, email, password, age, gender}) => 
-async (dispatch, getState) => {
+async (dispatch) => {
     try{ 
-        const {userSignin : {userInfo}} = getState();
         dispatch(updateUserRequest({userId, firstName, lastName, email, password, age, gender}));
         const data = await axios.patch(`${url}/${userId}`, 
         {userId, firstName, lastName, email, password, age, gender}, 
-        {headers: {Authorization : "Bearer " + userInfo.token}, withCredentials:true});
+        {headers: userAuthHeader(), withCredentials:true});
         dispatch(updateUserSuccess(data));
-        cookies.set("userInfo", JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(data));
 
     }catch(err){
         dispatch(updateUserFailure(err));

@@ -81,17 +81,16 @@ export const createOrUpdateTourFailure =(error) => {
     return {type: CREATE_OR_UPDATE_TOUR_FAILURE, payload:error};
 }
 
-export const createOrUpdateTour = (tour) => async (dispatch, getState) =>{
+export const createOrUpdateTour = (tour) => async (dispatch) =>{
     try{
-        const {orgSignin :{orgInfo}} = getState();
         dispatch(createOrUpdateTourRequest(tour));
         if(!tour._id){
         const {data} = await axios.post(url, tour, 
-            { headers: "Bearer " + orgInfo.token});
+            { headers: orgAuthHeader()});
             dispatch(createOrUpdateTourSuccess(data));
         } else {
             const {data} = await axios.patch(`${url}/${tour._id}`, tour, 
-            { headers: "Bearer " + orgInfo.token});
+            { headers: orgAuthHeader()});
             dispatch(createOrUpdateTourSuccess(data))
         }
 
@@ -115,12 +114,11 @@ export const deleteTourByAdminFailure = (error) => {
     return {type: ADMIN_DELETE_TOUR_FAILURE, payload: error};
 }
 
-export const deleteTourByAdmin = (tourId) => async (dispatch, getState) => {
+export const deleteTourByAdmin = (tourId) => async (dispatch) => {
     try{ 
-        const {userSignin: {userInfo}} = getState();
         dispatch(deleteTourByAdminRequest(tourId));
         const data = await axios.delete(`${url}/${tourId}`, 
-        {headers: {Authorization : "Bearer " + userInfo.token}});
+        {headers: authHeader()});
         dispatch(deleteTourByAdminSuccess(data));
     }catch(err){
         dispatch(deleteTourByAdminFailure(err))
@@ -129,8 +127,8 @@ export const deleteTourByAdmin = (tourId) => async (dispatch, getState) => {
 
 /**********************************************ADD HIKER TO TOUR******************************************************/
 
-export const addHikerToTourRequest= () => {
-    return {type: ADD_HIKER_TO_TOUR_REQUEST,};
+export const addHikerToTourRequest= (tourId) => {
+    return {type: ADD_HIKER_TO_TOUR_REQUEST, payload: tourId};
 }
 
 export const addHikerToTourSuccess = (data) => {
@@ -141,12 +139,12 @@ export const addHikerToTourFailure = (error) => {
     return {type: ADD_HIKER_TO_TOUR_FAILURE, payload: error};
 }
 
-export const addHikerToTour = (tourId) => async (dispatch, getState) => {
+export const addHikerToTour = (tourId, user) => async (dispatch) => {
     try {
-      const {userSignin: {userInfo}} = getState();
-      dispatch(addHikerToTourRequest());
-      const { data } = await axios.post(`${url}/${tourId}/hikers`,  
-      {headers: {Authorization : "Bearer " + userInfo.token}});
+      dispatch(addHikerToTourRequest(tourId));
+      const { data } = await axios.post(`${url}/${tourId}/hikers`, user,  
+      {headers: userAuthHeader()});
+      console.log("hiker to add", user);
       dispatch(addHikerToTourSuccess(data));
     } catch (error) {
       dispatch( addHikerToTourFailure(error));
@@ -177,12 +175,11 @@ export const fetchToursFailureByOrganizer = (error) =>{
     }
 }
 
-export const listToursByOrganizer = (searchKeyWord="", page = 1, limit =5) => async (dispatch, getState)  => {
+export const listToursByOrganizer = (searchKeyWord="", page = 1, limit =5) => async (dispatch)  => {
     try {
-        const {orgSignin : {orgInfo}} = getState();
         dispatch(fetchToursRequestByOrganizer());
         const { data } = await axios.get(`${url}/myTours?searchKeyword=${searchKeyWord}&page=${page}&limit=${limit}`, 
-        {headers: {Authorization : "Bearer " + orgInfo.token}}
+        {headers: orgAuthHeader()}
         );
         dispatch(fetchToursSuccessByOrganizer(data));
       } catch (error) {
@@ -204,12 +201,11 @@ export const deleteTourByTourOrganizerFailure = (error) => {
     return {type: TOUR_ORGANIZER_DELETE_TOUR_FAILURE, payload: error};
 }
 
-export const deleteTourByTourOrganizer = (tourId) => async (dispatch, getState) => {
+export const deleteTourByTourOrganizer = (tourId) => async (dispatch) => {
     try{ 
-        const {orgSignin : {orgInfo}} = getState();
         dispatch(deleteTourByTourOrganizerRequest(tourId));
         const data = await axios.delete(`${url}/tourOrg/${tourId}`, 
-        {headers: {Authorization : "Bearer " + orgInfo.token}});
+        {headers: orgAuthHeader()});
         dispatch(deleteTourByTourOrganizerSuccess(data));
     }catch(err){
         dispatch(deleteTourByTourOrganizerFailure(err))

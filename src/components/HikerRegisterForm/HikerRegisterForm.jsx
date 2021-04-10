@@ -36,7 +36,11 @@ const HikerRegisterForm = () => {
 
       const history = useHistory();
 
-      
+      useEffect(() => {
+        if(userInfo){
+          history.push('/tours');
+      } 
+      }, [userInfo])
 
       const handleAge =(date) => {
         let yOB = date.getFullYear();
@@ -49,11 +53,8 @@ const HikerRegisterForm = () => {
       const registerHandler = (e) =>{
         e.preventDefault();
         dispatch(registerUser(firstName,  lastName, email, password, age, gender));
-        if(userInfo){
-          history.push('/tours');
-      } else {
-          history.push('/'); 
-      }
+     
+        // history.push('/'); 
       }
 
     //////////////////////////////////////////////////////Validating methods////////////////////////////////////////////////////// 

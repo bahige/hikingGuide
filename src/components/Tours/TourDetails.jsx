@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import DetailsStyle from './TourDetailsStyle.module.css';
-import Image from  '../../assets/images/mukhtara.jpg'
 import TourDetailsGallery from './TourDetailsGallery';
 import {addHikerToTour, singleTourDetails} from '../../redux/tour/tourActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +16,11 @@ const TourDetails = (props) => {
     const signinData = useSelector(state => state.signinUser);
     const { userInfo, isAuthenticated } =signinData;
 
+    const regHikerData = useSelector(state =>state.registerHikerToTour);
+    const {sucessAdd} = regHikerData;
+
     const [userId, setUserId] = useState();
-    console.log("userInfo", userId);
+    console.log("userInfo", userInfo._id);
 
     
 
@@ -53,7 +55,9 @@ const TourDetails = (props) => {
                 <div className={DetailsStyle.detailsRow}>
                     <div className={DetailsStyle.hostTag}><b><u>Host: {tour.tourOperator.name}</u></b>  </div>
                    {isAuthenticated ? 
-                    <button className={DetailsStyle.reserveButton} onClick={submitHandler}> Reserve Hike </button>
+                    <button className={DetailsStyle.reserveButton}
+                     onClick={submitHandler}
+                     disabled={regHikerData}> {regHikerData ? "Reserved" : "Reserve Hike"} </button>
                     : null } 
                 </div>
 

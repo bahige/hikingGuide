@@ -13,9 +13,10 @@ import { LIST_TOUR_ORGANIZERS_REQUEST, LIST_TOUR_ORGANIZERS_SUCCESS,
      UPDATE_TOUR_ORGANIZER_FAILURE,
      DISPLAY_TOURS_OF_TOUR_ORGANIZER_REQUEST,
      DISPLAY_TOURS_OF_TOUR_ORGANIZER_SUCCESS,
-     DISPLAY_TOURS_OF_TOUR_ORGANIZER_FAILURE} from "./organizerActionTypes"
+     DISPLAY_TOURS_OF_TOUR_ORGANIZER_FAILURE} from "./organizerActionTypes";
 
-import Cookies from 'js-cookie';
+     import {authHeader, orgAuthHeader} from '../authHeader';
+
 
 const url = "http://localhost:3400/tourOperators";
 
@@ -38,7 +39,7 @@ export const registerOrganizer= (name, image, email, password, street, city, dis
             const {data} = await axios.post(`${url}/register`, {name, image, email, password, street, city, district, governorate, 
                 phoneNumber, contactName});
             dispatch(registerOrganizerSuccess(data));
-            Cookies.set('orgInfo', JSON.stringify(data));
+            localStorage.setItem('orgInfo', JSON.stringify(data));
             console.log("data", data);
         }
         catch(err){
@@ -64,8 +65,7 @@ export const registerOrganizer= (name, image, email, password, street, city, dis
         try{ dispatch(signInOrganizerRequest(email, password));
             const {data} = await axios.post(`${url}/signin`, {email, password});
             dispatch(signInOrganizerSuccess(data));
-            Cookies.set('orgInfo', JSON.stringify(data));
-            console.log("Cookies", Cookies);
+            localStorage.setItem('orgInfo', JSON.stringify(data));
         } catch(err){
             dispatch(signInOrganizerFailure(err));
         }
@@ -117,11 +117,10 @@ export const deleteTourOrganizerFailure=(error) => {
     return {type: DELETE_TOUR_ORGANIZER_FAILURE, payload: error}
 }
 
-export const deleteTourOrganizer = (orgId) => async (dispatch, getState) => {
+export const deleteTourOrganizer = (orgId) => async (dispatch) => {
     try{
-        const {userSignin : {userInfo}} = getState();
         dispatch(deleteTourOrganizerRequest(orgId));
-        const data = await axios.delete(`${url}/${orgId}`, {headers:{Authorization :"Bearer " + userInfo.token}});
+        const data = await axios.delete(`${url}/${orgId}`, {headers: authHeader()});
         dispatch(deleteTourOrganizerSuccess(data));
     }catch(err){
         dispatch(deleteTourOrganizerFailure(err));
@@ -156,7 +155,7 @@ export const getSingleTourOrganizer = (orgId) => async (dispatch) =>{
 
 
 export const signOutOrganizer = () => (dispatch) => {
-    Cookies.remove('orgInfo');
+    localStorage.removeItem('orgInfo');
     dispatch({ type: SIGNOUT_TOUR_ORGANIZER });
 }
 
@@ -176,15 +175,14 @@ export const updateTourOrganizerFailure=(error) => {
 }
 
 export const updateTourOrganizer = ({id, name, image, email, password, street, city, 
-    district, governorate, phoneNumber, contactName}) => async (dispatch, getState) => {
+    district, governorate, phoneNumber, contactName}) => async (dispatch) => {
     try{ 
-        const {orgSignin: {orgInfo}} = getState();
         dispatch(updateTourOrganizerRequest({id, name, image, email, password, street, city, district, governorate, phoneNumber, contactName}));
         const data = await axios.patch(`${url}/${id}`, 
         {id, name, image, email, password, street, city, district, governorate, phoneNumber, contactName},
-        {headers: {Authorization: "Bearer " + orgInfo.token}});
+        {headers: orgAuthHeader()});
         dispatch(updateTourOrganizerSuccess(data));
-        Cookies.set('orgInfo', JSON.stringify(data));
+        localStorage.setItem('orgInfo', JSON.stringify(data));
     }catch(err){
         dispatch(updateTourOrganizerFailure(err));
     }

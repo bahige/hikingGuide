@@ -102,6 +102,10 @@
   cursor: pointer;
 }
 
+.reserveButton:disabled {
+  background-color: #808080;
+}
+
 .primaryTag {
   font-size: var(--mainTitleFontSize);
   font-weight: bold;
