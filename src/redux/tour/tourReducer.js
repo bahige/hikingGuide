@@ -9,7 +9,10 @@ TOUR_ORGANIZER_DELETE_TOUR_SUCCESS,
 TOUR_ORGANIZER_DELETE_TOUR_FAILURE,
 ADD_HIKER_TO_TOUR_FAILURE,
 ADD_HIKER_TO_TOUR_SUCCESS,
-ADD_HIKER_TO_TOUR_REQUEST} from '../tour/tourActionTypes';
+ADD_HIKER_TO_TOUR_REQUEST,
+SHOW_TOURS_OF_HIKER_SUCCESS,
+SHOW_TOURS_OF_HIKER_REQUEST,
+SHOW_TOURS_OF_HIKER_FAILURE} from '../tour/tourActionTypes';
 
 export const listToursReducer = (state={}, action) => {
     switch(action.type){
@@ -51,7 +54,7 @@ export const addHikerToTourReducer = (state={}, action) =>{
         case ADD_HIKER_TO_TOUR_REQUEST:
             return {loading:true, successAdd:false};
         case ADD_HIKER_TO_TOUR_SUCCESS:
-            return {loading:false, hiker: action.payload, successAdd:true};
+            return {loading:false, hiker: action.hiker, success: action.success};
         case ADD_HIKER_TO_TOUR_FAILURE:
             return {loading:false, error:action.payload, successAdd:false};
         default:
@@ -120,6 +123,25 @@ export const deleteTourByTourOrganizerReducer = (state={}, action) => {
             return {loading: false, tour:action.payload, success: true};
         case TOUR_ORGANIZER_DELETE_TOUR_FAILURE:
             return {loading: false, error:action.payload};
+        default:
+            return state;
+    }
+}
+
+export const hikerToursReducer = (state={}, action) =>{
+    switch(action.type){
+        case SHOW_TOURS_OF_HIKER_REQUEST:
+            return {...state, loading:true};
+        case SHOW_TOURS_OF_HIKER_SUCCESS:
+            return {loading:false,
+                    error:"",
+                    tours: action.tours,
+                    totalPages: action.totalPages,
+                    currentPage: action.currentPage,
+                    limit: action.limit,
+                    count: action.count};
+        case SHOW_TOURS_OF_HIKER_FAILURE:
+            return {loading:false, tours:[], error:action.payload};
         default:
             return state;
     }

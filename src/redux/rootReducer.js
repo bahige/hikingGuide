@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
 import {singleTourReducer, createOrUpdateTourReducer, deleteTourByAdminReducer, tourListByOrganizerReducer,
-deleteTourByTourOrganizerReducer, listToursReducer, addHikerToTourReducer} from './tour/tourReducer';
+deleteTourByTourOrganizerReducer, listToursReducer, addHikerToTourReducer, hikerToursReducer} from './tour/tourReducer';
 import {deleteUserReducer, listUsersReducer, registerUserReducer, signinUserReducer,
 updateUserReducer} from './user/userReducer';
 import {deleteTourOrganizerReducer, getSingleTourOrganizerReducer, 
@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
     fetchToursByOrganizer: tourListByOrganizerReducer,
     tourDeleteByOrganizer: deleteTourByTourOrganizerReducer,
     registerHikerToTour: addHikerToTourReducer,
+    fetchToursByHiker: hikerToursReducer,
 
     //Users
     signinUser:  signinUserReducer,

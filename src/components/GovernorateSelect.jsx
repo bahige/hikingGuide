@@ -7,8 +7,6 @@ const GovernorateSelect = (props) => {
 
     const {handleDistrict, handleGovernorate} = props;
 
-    // const [district, setDistrict] = useState("");
-    // const [governorate, setGovernorate] = useState("");
 
     const [districtError, setDistrictError] = useState("");
     const [governorateError, setGovernorateError] = useState("");

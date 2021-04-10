@@ -27,8 +27,8 @@ const Header = () => {
     const regOrgData= useSelector(state => state.regOrganizer);
     const orgSignin= useSelector(state => state.signinOrg);
 
-    const{organizer} = orgSignin;
-    const{organizer : organizer1} = regOrgData;
+    const{orgInfo} = orgSignin;
+    const{orgInfo : orgInfo1} = regOrgData;
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -51,7 +51,7 @@ const Header = () => {
 
     const orgSignOut= () => {
         dispatch(signOutOrganizer());
-        if(organizer|| organizer1){
+        if(orgInfo|| orgInfo1){
             history.push('/tours');
         } else {
             history.push('/'); 
@@ -76,7 +76,7 @@ const Header = () => {
                 <nav>
                     <ul className={displayMenu}>
                     { userInfo && userInfo.token || userInfo1 && userInfo1.token 
-                    || organizer && organizer.token || organizer1 && organizer1.token  ? null :
+                    || orgInfo && orgInfo.token || orgInfo1 && orgInfo1.token  ? null :
                         <li>
                             <Link to="/">
                                 <div> Home </div>
@@ -95,7 +95,7 @@ const Header = () => {
                             </Link>
                         </li>
 
-                    { organizer && organizer.token || organizer1 && organizer1.token ? 
+                    { orgInfo && orgInfo.token || orgInfo1 && orgInfo1.token ? 
                         <li>
                             <Link to={`/createTour`}>
                             <div> Create Tour </div>
@@ -103,17 +103,33 @@ const Header = () => {
                         </li> 
                         : null}
 
-                    { organizer && organizer.token ? 
+                    { orgInfo && orgInfo.token ? 
                         <li>
-                            <Link to={`/myTours/${organizer._id}`}>
+                            <Link to={`/myTours/${orgInfo._id}`}>
                             <div> My Tours </div>
                             </Link>
                         </li> 
                         : null}
 
-                    { organizer1 && organizer1.token ? 
+                    { orgInfo1 && orgInfo1.token ? 
                         <li>
-                            <Link to={`/myTours/${organizer1._id}`}>
+                            <Link to={`/myTours/${orgInfo1._id}`}>
+                            <div> My Tours </div>
+                            </Link>
+                        </li> 
+                        : null}
+
+                    { userInfo && userInfo.token ? 
+                        <li>
+                            <Link to={`/hikerTours`}>
+                            <div> My Tours </div>
+                            </Link>
+                        </li> 
+                        : null}
+
+                    { userInfo1 && userInfo1.token ? 
+                        <li>
+                            <Link to={`/hikerTours`}>
                             <div> My Tours </div>
                             </Link>
                         </li> 
@@ -144,15 +160,15 @@ const Header = () => {
                         </li> 
                         : null}
 
-                    { organizer && organizer.token ? 
+                    { orgInfo && orgInfo.token ? 
                         <li>
-                            <Link to={`organizer/${organizer._id}`}>  <div> My Profile </div>  </Link> 
+                            <Link to={`organizer/${orgInfo._id}`}>  <div> My Profile </div>  </Link> 
                         </li>
                         :null}
 
-                    {  organizer1 && organizer1.token ? 
+                    {  orgInfo1 && orgInfo1.token ? 
                         <li>
-                            <Link to={`organizer/${organizer1._id}`}>  <div> My Profile </div>  </Link> 
+                            <Link to={`organizer/${orgInfo1._id}`}>  <div> My Profile </div>  </Link> 
                         </li>
                         :null}
 
@@ -168,7 +184,7 @@ const Header = () => {
                         </li>
                         :null}
 
-                        { organizer && organizer.token || organizer1 && organizer1.token ? 
+                        { orgInfo && orgInfo.token || orgInfo1 && orgInfo1.token ? 
                         <li>
                             <Link to="/">  <div onClick={orgSignOut}> Sign Out </div>  </Link> 
                         </li>

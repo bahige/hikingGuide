@@ -22,17 +22,17 @@ const SignInForm = (props) => {
     const [passwordErrors, setPasswordErrors] = useState("");
 
     const signinOrg = useSelector(state => state.signinOrg);
-    const {loading, organizer, error: orgError, isAuthenticated} = signinOrg;
+    const {loading, orgInfo, error: orgError, isAuthenticated} = signinOrg;
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-      if(organizer){
+      if(orgInfo){
         history.push('/tours');
     } else {
         history.push('/'); 
     }
-    }, [organizer])
+    }, [orgInfo])
 
 
     const validateEmail = (email) => {

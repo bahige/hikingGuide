@@ -17,21 +17,28 @@ const TourDetails = (props) => {
     const { userInfo, isAuthenticated } =signinData;
 
     const regHikerData = useSelector(state =>state.registerHikerToTour);
-    const {sucessAdd} = regHikerData;
+    const {hiker, success} = regHikerData;
+
+    const singleTourData = useSelector(state =>state.fetchTourDetails);
 
     const [userId, setUserId] = useState();
+    const [successReg, setSuccessReg] = useState(false);
     console.log("userInfo", userInfo._id);
+    
 
     
 
     useEffect(() => {
         dispatch(singleTourDetails(props.match.params.id));
-        setUserId(userInfo._id)
+        setUserId(userInfo._id);
+        // setSuccessReg(false);
     }, [])
 
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(addHikerToTour(props.match.params.id, {user: userId}));
+        setSuccessReg(success);
+
     }
 
 
@@ -57,7 +64,7 @@ const TourDetails = (props) => {
                    {isAuthenticated ? 
                     <button className={DetailsStyle.reserveButton}
                      onClick={submitHandler}
-                     disabled={regHikerData}> {regHikerData ? "Reserved" : "Reserve Hike"} </button>
+                     disabled={successReg}> {successReg ? "Reserved" : "Reserve Hike"} </button>
                     : null } 
                 </div>
 

@@ -32,7 +32,7 @@ const OrganizerRegisterForm = () => {
 
 
     const regOrgData = useSelector(state => state.regOrganizer);
-    const {loading, organizer, error} = regOrgData;
+    const {loading, orgInfo, error} = regOrgData;
     const dispatch = useDispatch();
 
     const redirect ='/tours';
@@ -40,10 +40,10 @@ const OrganizerRegisterForm = () => {
 
 
     useEffect(() => {
-      if(organizer){
+      if(orgInfo){
         history.push('/tours');
     } 
-    }, [organizer])
+    }, [orgInfo])
     
     //////////////////////////////////////////////////////Validating methods////////////////////////////////////////////////////// 
 

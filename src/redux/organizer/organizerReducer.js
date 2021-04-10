@@ -12,7 +12,7 @@ export const registerOrganizerReducer = (state={loading:false, organizer:{}, err
         case REGISTER_TOUR_ORGANIZER_REQUEST:
             return {...state, loading: true};
         case REGISTER_TOUR_ORGANIZER_SUCCESS:
-            return {...state, organizer: action.payload};
+            return {...state, orgInfo: action.payload};
         case REGISTER_TOUR_ORGANIZER_FAILURE:
             return {...state, error: action.payload};
         case SIGNOUT_TOUR_ORGANIZER:
@@ -28,7 +28,7 @@ export const signinOrganizerReducer = (state={}, action) => {
         case SIGNIN_TOUR_ORGANIZER_REQUEST:
             return {loading: true};
         case SIGNIN_TOUR_ORGANIZER_SUCCESS:
-            return {loading: false, organizer: action.payload, error:"", isAuthenticated: true};
+            return {loading: false, orgInfo: action.payload, error:"", isAuthenticated: true};
         case SIGNIN_TOUR_ORGANIZER_FAILURE:
             return {loading:false, error: action.payload};
         case SIGNOUT_TOUR_ORGANIZER:
