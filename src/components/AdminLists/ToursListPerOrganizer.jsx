@@ -14,18 +14,16 @@ const ToursListPerOrganizer = (props) => {
 
     const toursData = useSelector(state => state.fetchToursByOrganizer);
     const {loading, tours, error, limit, count} = toursData;
-    console.log("data", toursData);
 
     const deleteTourData = useSelector(state=> state.tourDeleteByOrganizer);
     const {success: successDelete} = deleteTourData;
 
     const signinData = useSelector(state=> state.signinOrg);
     const {loading: loadingSignIn, organizer} = signinData;
-    console.log("organizer", organizer);
 
     const [postsPerPage, setPostsPerPage] = useState(limit);
     const [currentPage, setCurrentPage] = useState(1);
-    const [tour, setTour] = useState();
+    const [tourId, setTourId] = useState();
 
     const [searchKeyword, setSearchKeyword] = useState();
 
@@ -43,9 +41,10 @@ const ToursListPerOrganizer = (props) => {
         dispatch(listTours(currentPage, postsPerPage))
     }
 
-    const deleteHandler = (tour) =>{
-        dispatch(deleteTourByTourOrganizer(tour._id));
+    const deleteHandler = () =>{
+        // dispatch(deleteTourByTourOrganizer(tourId));
         setModalVisible(false);
+        console.log("tourId",tourId);
     }
 
     const searchHandler = (e) => {
@@ -59,9 +58,10 @@ const ToursListPerOrganizer = (props) => {
  
             const [modalVisible, setModalVisible] = useState(false);
 
-            const openModal = (tour) => {
+            const openModal = (tourId) => {
                 setModalVisible(true);
-                setTour(tour);
+                setTourId(tourId);
+                console.log("tourId",tourId);
             }
         
             const customStyles = {
@@ -97,7 +97,7 @@ const ToursListPerOrganizer = (props) => {
         toursData && toursData.tours && tours.map((tour)=>
         <div>
         <SingleTourRow tourId={tour._id} tourTitle={tour.title} tourDate={tour.date}
-        tourOperator={tour.tourOperator.name} openDeleteModal={() => openModal(tour)}/>
+        tourOperator={tour.tourOperator.name} openDeleteModal={() => openModal(tour._id)}/>
         
         <Modal isOpen={modalVisible} 
             onRequestClose={()=>setModalVisible(false)}
@@ -105,7 +105,7 @@ const ToursListPerOrganizer = (props) => {
             <div className={ListStyle.modal}>
                 <div> Are you sure you want to delete this item? </div>
                 <div className={ListStyle.buttonsContainer}>
-                    <button className={ListStyle.editButton} onClick={()=> deleteHandler(tour)}> Delete </button>
+                    <button className={ListStyle.editButton} onClick={deleteHandler}> Delete </button>
                     <button className={ListStyle.deleteButton} onClick={()=> setModalVisible(false)}> Cancel </button>
                 </div>
             </div>

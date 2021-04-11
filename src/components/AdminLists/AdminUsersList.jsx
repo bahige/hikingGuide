@@ -22,13 +22,16 @@ const AdminUsersList = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-       dispatch(listUsers());
-    }, [deleteSuccess])
-
     const [postsPerPage, setPostsPerPage] = useState(limit);
     const [currentPage, setCurrentPage] = useState(1);
-    const [userId, setUserId] = useState("");
+    const [userId, setUserId] = useState();
+
+    useEffect(() => {
+       dispatch(listUsers());
+       setCurrentPage(1);
+    }, [deleteSuccess])
+
+  
 
 
     const handlePageChange = (currentPage) =>{
@@ -39,17 +42,17 @@ const AdminUsersList = () => {
 
         //////////////////////////////Delete Function////////////////////////////////////
 
-        const deleteHandler = (user) => {
-            dispatch(deleteUser(user._id));
+        const deleteHandler = () => {
+            dispatch(deleteUser(userId));
             setModalVisible(false);
         }
 
         //////////////////////////////Modal Styling and Functions////////////////////////////////////
         const [modalVisible, setModalVisible] = useState(false);
 
-        const openModal = (user) => {
+        const openModal = (userId) => {
             setModalVisible(true);
-            setUserId(user._id);     
+            setUserId(userId);
         }
     
     
@@ -81,7 +84,7 @@ const AdminUsersList = () => {
                     <div className={ListStyle.cell}>{`${user.firstName}  ${user.lastName}`}</div>
                     <div>
                     <Link>
-                    <button className={ListStyle.deleteButton} onClick={() =>  openModal(user)}>
+                    <button className={ListStyle.deleteButton} onClick={() =>  openModal(user._id)}>
                     <FontAwesomeIcon icon={faTrash}/> Delete </button>
                     </Link>
                     </div>
@@ -91,7 +94,7 @@ const AdminUsersList = () => {
                     <div className={ListStyle.modal}>
                         <div> Are you sure you want to delete this item? </div>
                         <div className={ListStyle.buttonsContainer}>
-                            <button className={ListStyle.editButton} onClick={() => deleteHandler(user)} > Delete </button>
+                            <button className={ListStyle.editButton} onClick={deleteHandler} > Delete </button>
                             <button className={ListStyle.deleteButton} onClick={()=> setModalVisible(false)}> Cancel </button>
                         </div>
                     </div>

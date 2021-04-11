@@ -22,33 +22,36 @@ const AdminTourOrganizersList = () => {
     const {success: successDelete} = deleteOrgData;
 
   
+    const [postsPerPage, setPostsPerPage] = useState(limit);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const [tourOrganizerId, setTourOrganizerId] = useState();
     const dispatch = useDispatch();
 
     useEffect(() => {
-       dispatch(listTourOrganizers());
-    }, [deleteOrgData])
+       dispatch(listTourOrganizers(searchKeyword, currentPage, postsPerPage));
+    }, [deleteOrgData, currentPage, postsPerPage])
 
-    const [postsPerPage, setPostsPerPage] = useState(limit);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [tourOrganizer, setTourOrganizer] = useState();
 
-    const deleteHandler = (organizer) => {
-        dispatch(deleteTourOrganizer(organizer._id));
+
+    const deleteHandler = () => {
+        dispatch(deleteTourOrganizer(tourOrganizerId));
         setModalVisible(false);
+        console.log("tour organizer", tourOrganizerId);
     }
 
 
     const handlePageChange = (currentPage) =>{
         setCurrentPage(currentPage);
-        dispatch(listTourOrganizers(currentPage, postsPerPage))
+        dispatch(listTourOrganizers(searchKeyword,currentPage, postsPerPage))
     }
 
     //////////////////////////////Modal Styling and Functions////////////////////////////////////
     const [modalVisible, setModalVisible] = useState(false);
 
-    const openModal = (organizer) => {
+    const openModal = (organizerId) => {
         setModalVisible(true);
-        setTourOrganizer(organizer)
+        setTourOrganizerId(organizerId);
     }
 
     const customStyles = {
@@ -82,7 +85,7 @@ const AdminTourOrganizersList = () => {
                         <FontAwesomeIcon icon={faInfo}/> Details </button>
                     </Link>
                     <Link>
-                        <button className={ListStyle.deleteButton} onClick={() => openModal(tourOrganizer)}>
+                        <button className={ListStyle.deleteButton} onClick={() => openModal(tourOrganizer._id)}>
                         <FontAwesomeIcon icon={faTrash}/> Delete </button>
                     </Link>
                     </div>
@@ -92,7 +95,7 @@ const AdminTourOrganizersList = () => {
                     <div className={ListStyle.modal}>
                         <div> Are you sure you want to delete this item? </div>
                         <div className={ListStyle.buttonsContainer}>
-                            <button className={ListStyle.editButton} onClick={() => deleteHandler(tourOrganizer)}> Delete </button>
+                            <button className={ListStyle.editButton} onClick={deleteHandler}> Delete </button>
                             <button className={ListStyle.deleteButton} onClick={()=> setModalVisible(false)}> Cancel </button>
                         </div>
                     </div>

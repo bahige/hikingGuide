@@ -71,7 +71,7 @@
   margin: 5px;
 }
 
-:is(.createButton, .editButton, .deleteButton):hover {
+:is(.createButton, .editButton, .deleteButton, .hikersButton):hover {
   cursor: pointer;
 }
 

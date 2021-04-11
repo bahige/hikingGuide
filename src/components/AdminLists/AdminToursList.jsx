@@ -19,24 +19,32 @@ const AdminToursList = () => {
 
     const dispatch = useDispatch();
 
-
-    useEffect(() => {
-        dispatch(listTours());
-    }, [successDelete]);
-
+    
     const [postsPerPage, setPostsPerPage] = useState(limit);
     const [currentPage, setCurrentPage] = useState(1);
-    const [tour, setTour] = useState();
-
+    const [searchKeyword, setSearchKeyword] = useState("");
+    const [governorate, setGovernorate] = useState("");
+    const [hikingLevel, setHikingLevel] = useState("");
+    const [date, setDate] = useState("");
+    const [tourId, setTourId] = useState();
 
     const handlePageChange = (currentPage) =>{
         setCurrentPage(currentPage);
-        dispatch(listTours(currentPage, postsPerPage))
+        dispatch(listTours(searchKeyword, governorate, hikingLevel, date, currentPage, postsPerPage))
     }
+    
 
-    const deleteHandler = (tour) =>{
-        dispatch(deleteTourByAdmin(tour._id));
+    useEffect(() => {
+        dispatch(listTours(searchKeyword, governorate, hikingLevel, date, currentPage, postsPerPage));
+    }, [successDelete, currentPage, postsPerPage]);
+
+
+
+
+    const deleteHandler = () =>{
+        dispatch(deleteTourByAdmin(tourId));
         setModalVisible(false);
+        console.log("tour", tourId);
     }
 
     const [tourOperator, setTourOperator] = useState("Lebanese International Hikes");
@@ -44,9 +52,10 @@ const AdminToursList = () => {
             //////////////////////////////Modal Styling and Functions////////////////////////////////////
             const [modalVisible, setModalVisible] = useState(false);
 
-            const openModal = (tour) => {
+            const openModal = (tourId) => {
                 setModalVisible(true);
-                setTour(tour);
+                setTourId(tourId);
+                console.log("tour", tourId);
             }
         
             const customStyles = {
@@ -74,7 +83,7 @@ const AdminToursList = () => {
         toursData && toursData.tours && tours.map((tour)=>
         <div>
         <SingleTourRow tourId={tour._id} tourTitle={tour.title} tourDate={tour.date}
-        tourOperator={tourOperator} openDeleteModal={() => openModal(tour)}/>
+        tourOperator={tourOperator} openDeleteModal={() => openModal(tour._id)}/>
         
         <Modal isOpen={modalVisible} 
             onRequestClose={()=>setModalVisible(false)}
@@ -82,7 +91,7 @@ const AdminToursList = () => {
             <div className={ListStyle.modal}>
                 <div> Are you sure you want to delete this item? </div>
                 <div className={ListStyle.buttonsContainer}>
-                    <button className={ListStyle.editButton} onClick={()=> deleteHandler(tour)}> Delete </button>
+                    <button className={ListStyle.editButton} onClick={deleteHandler}> Delete </button>
                     <button className={ListStyle.deleteButton} onClick={()=> setModalVisible(false)}> Cancel </button>
                 </div>
             </div>
