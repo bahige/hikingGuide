@@ -169,3 +169,11 @@
   font-size: var(--titleFontSize);
   text-decoration: underline;
 }
+
+.warningMessage {
+  display: block;
+  color: var(--alarmMessageColor);
+  font-size: large;
+  text-align: center;
+  height: 100vh;
+}

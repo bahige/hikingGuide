@@ -9,11 +9,11 @@ const SingleTourOperatorAuth = (props) => {
 
     const organizerId = props.match.params.authOrgId;
 
-    const signinData = useSelector(state => state.signinOrg);
-    const {loading, organizer, isAuthenticated, error} = signinData;
+    const signinData = useSelector(state => state.singleTourOrganizer);
+    const {loading, organizer, error} = signinData;
     const updatedOrganizer = useSelector(state => state.updateOrganizer);
     const {loading: loadingUpdate, organizer: organizerUpdated, success, error: errUpdate} = updatedOrganizer;
-
+    console.log("hello", props.match.params.authOrgId); 
 
     const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const SingleTourOperatorAuth = (props) => {
 
 
     useEffect(() => {
-        dispatch(getSingleTourOrganizer(organizer._id))
+        dispatch(getSingleTourOrganizer(organizerId))
     }, [success])
 
     return (

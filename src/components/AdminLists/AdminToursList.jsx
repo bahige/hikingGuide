@@ -27,6 +27,7 @@ const AdminToursList = () => {
     const [hikingLevel, setHikingLevel] = useState("");
     const [date, setDate] = useState("");
     const [tourId, setTourId] = useState();
+    const [hideEditButton, setHideEditButton] = useState(false);
 
     const handlePageChange = (currentPage) =>{
         setCurrentPage(currentPage);
@@ -83,7 +84,8 @@ const AdminToursList = () => {
         toursData && toursData.tours && tours.map((tour)=>
         <div>
         <SingleTourRow tourId={tour._id} tourTitle={tour.title} tourDate={tour.date}
-        tourOperator={tourOperator} openDeleteModal={() => openModal(tour._id)}/>
+        tourOperator={tourOperator} openDeleteModal={() => openModal(tour._id)}
+        hideEditButton ={hideEditButton}/>
         
         <Modal isOpen={modalVisible} 
             onRequestClose={()=>setModalVisible(false)}
@@ -99,7 +101,9 @@ const AdminToursList = () => {
         
         </div> ) }
 
-
+        {toursData && !toursData.tours ? 
+        <div className={ListStyle.warningMessage}>You did not register in any tour.</div> : null}
+        
         <Pagination postsPerPage={limit} totalPosts={count} 
         paginate={(currentPage)=> handlePageChange(currentPage)} 
         currentPage={currentPage}></Pagination>

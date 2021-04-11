@@ -23,6 +23,7 @@ const ToursListPerOrganizer = (props) => {
 
     const [postsPerPage, setPostsPerPage] = useState(limit);
     const [currentPage, setCurrentPage] = useState(1);
+    const [hideEditButton, setHideEditButton] = useState(true);
     const [tourId, setTourId] = useState();
 
     const [searchKeyword, setSearchKeyword] = useState();
@@ -89,15 +90,18 @@ const ToursListPerOrganizer = (props) => {
         </div>
         {loading ? null
         : error ? null : 
-        toursData && toursData.tours && 
-        <div className={ListStyle.singleTourRow}><span>Tour Title</span>  <span>Tour Date</span> <span>Tour Operator</span> <span></span></div> }
+        toursData && toursData.tours && toursData.tours.length !==0  ?
+        <div className={ListStyle.singleTourRow}><span>Tour Title</span>  
+        <span>Tour Date</span> <span>Tour Operator</span> <span></span>
+        </div> : null}
         
         {loading ? <div> Loading ... </div>
         : error ? <div> Error: {error} </div> : 
         toursData && toursData.tours && tours.map((tour)=>
         <div>
         <SingleTourRow tourId={tour._id} tourTitle={tour.title} tourDate={tour.date}
-        tourOperator={tour.tourOperator.name} openDeleteModal={() => openModal(tour._id)}/>
+        tourOperator={tour.tourOperator.name} openDeleteModal={() => openModal(tour._id)}
+        hideEditButton={hideEditButton}/>
         
         <Modal isOpen={modalVisible} 
             onRequestClose={()=>setModalVisible(false)}
@@ -113,6 +117,8 @@ const ToursListPerOrganizer = (props) => {
         
         </div> ) }
 
+        {toursData && toursData.tours && toursData.tours.length === 0 ? 
+        <div className={ListStyle.warningMessage}>You did not create in any tours yet.</div> : null}
 
         <Pagination postsPerPage={limit} totalPosts={count} 
         paginate={(currentPage)=> handlePageChange(currentPage)} 

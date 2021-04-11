@@ -16,9 +16,8 @@ import {useHistory} from 'react-router-dom';
 
 const TourForm = (props) => {
 
-    const {idOfTour} = props;
     // Defining the input values of the form
-    const [id, setId]=useState();
+    const [idOfTour, setTourId]=useState();
     const [tourTitle, setTourTitle] = useState();
     const [profileImage, setProfileImage] = useState();
     const [tourType, setTourType] = useState();
@@ -66,7 +65,7 @@ const TourForm = (props) => {
 
     const handleTourId =() =>{
         if(tourId){
-            setId(tourId);
+            setTourId(tourId);
         }
     }
 
@@ -91,7 +90,7 @@ const TourForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(createOrUpdateTour({
-            _id: id,
+            _id: idOfTour,
             title: tourTitle,
             profileImage: profileImage,
             tourType: tourType,

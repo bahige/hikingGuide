@@ -48,8 +48,10 @@ const ToursListPerUser = (props) => {
   
         {loading ? null
         : error ? null : 
-        toursData && toursData.tours && 
-        <div className={ListStyle.singleTourRow}><span>Tour Title</span>  <span>Tour Date</span> <span>Tour Operator</span> <span></span></div> }
+        toursData && toursData.tours && toursData.tours.length !==0 ?
+        <div className={ListStyle.singleTourRow}>
+            <span>Tour Title</span>  <span>Tour Date</span> <span>Tour Operator</span> <span></span>
+        </div> : null }
         
         {loading ? <div> Loading ... </div>
         : error ? <div> Error: {error} </div> : 
@@ -60,6 +62,8 @@ const ToursListPerUser = (props) => {
           
         </div> ) }
 
+        {toursData && toursData.tours && toursData.tours.length===0 ? 
+        <div className={ListStyle.warningMessage}>You did not register in any tour.</div> : null}
 
         <Pagination postsPerPage={limit} totalPosts={count} 
         paginate={(currentPage)=> handlePageChange(currentPage)} 

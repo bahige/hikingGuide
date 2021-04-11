@@ -21,14 +21,15 @@ const TourDetails = (props) => {
 
     const [userId, setUserId] = useState();
     const [successReg, setSuccessReg] = useState(false);
-    console.log("userInfo", userInfo._id);
     
 
     
 
     useEffect(() => {
         dispatch(singleTourDetails(props.match.params.id));
+        if(userInfo){
         setUserId(userInfo._id);
+        }
         // setSuccessReg(false);
     }, [])
 
@@ -58,7 +59,7 @@ const TourDetails = (props) => {
                 <hr/>
 
                 <div className={DetailsStyle.detailsRow}>
-                    <div className={DetailsStyle.hostTag}><b><u>Host: {tour.tourOperator.name}</u></b>  </div>
+                    <div className={DetailsStyle.hostTag}><b><u>Host: {tour && tour.tourOperator && tour.tourOperator.name}</u></b>  </div>
                    {isAuthenticated ? 
                     <button className={DetailsStyle.reserveButton}
                      onClick={submitHandler}

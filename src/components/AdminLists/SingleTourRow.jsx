@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 
 
 const SingleTourRow = (props) => {
-    const {tourId, tourTitle, tourDate, tourOperator, openDeleteModal} = props;
+    const {tourId, tourTitle, tourDate, tourOperator, openDeleteModal, hideEditButton} = props;
 
     const regOrgData= useSelector(state => state.regOrganizer);
     const orgSignin= useSelector(state => state.signinOrg);
@@ -31,10 +31,10 @@ const SingleTourRow = (props) => {
                 <button className={ListStyle.hikersButton} type="submit">
                 <FontAwesomeIcon icon={faHiking}/> Hikers </button>
                 </Link> : null }
-                <Link to={`toursList/${tourId}`}>
+                {hideEditButton ? <Link to={`toursList/${tourId}`}>
                 <button className={ListStyle.editButton} type="submit">
                 <FontAwesomeIcon icon={faEdit}/> Edit </button>
-                </Link>
+                </Link> : null}
                 <Link>
                 <button className={ListStyle.deleteButton} type="submit" onClick={openDeleteModal}><FontAwesomeIcon icon={faTrash}/> Delete </button>
                 </Link>
