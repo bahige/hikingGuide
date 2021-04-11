@@ -1,14 +1,24 @@
 import React from 'react'
+import {useSelector } from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faHiking } from '@fortawesome/free-solid-svg-icons';
 import ListStyle from './ListStyle.module.css';
 import Moment from 'react-moment';
 import {Link} from 'react-router-dom';
 
 
+
 const SingleTourRow = (props) => {
     const {tourId, tourTitle, tourDate, tourOperator, openDeleteModal} = props;
+
+    const regOrgData= useSelector(state => state.regOrganizer);
+    const orgSignin= useSelector(state => state.signinOrg);
+
+    const{orgInfo} = orgSignin;
+    const{orgInfo : orgInfo1} = regOrgData;
+
 
 
     return (
@@ -17,6 +27,10 @@ const SingleTourRow = (props) => {
             <div className={ListStyle.cell}><Moment format='dddd MMMM Do, YYYY'  date={tourDate}></Moment></div>
             <div className={ListStyle.cell}>{tourOperator}</div>
             <div className={`${ListStyle.buttonsContainer} ${ListStyle.cell}`}>
+               { orgInfo || orgInfo1 ? <Link to={`hikersList/${tourId}`}>
+                <button className={ListStyle.hikersButton} type="submit">
+                <FontAwesomeIcon icon={faHiking}/> Hikers </button>
+                </Link> : null }
                 <Link to={`toursList/${tourId}`}>
                 <button className={ListStyle.editButton} type="submit">
                 <FontAwesomeIcon icon={faEdit}/> Edit </button>

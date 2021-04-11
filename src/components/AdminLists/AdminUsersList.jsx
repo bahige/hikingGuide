@@ -69,6 +69,9 @@ const AdminUsersList = () => {
     
     return ( 
         <div className={ListStyle.mainContainer}>
+            
+            <div className={ListStyle.titleRow}> List of All Registered Users </div>
+
  
             {loading ? <div> loading ... </div> :
             error ? <div> Error :{error} </div> : 

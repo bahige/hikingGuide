@@ -27,6 +27,7 @@ import UserProfile from './components/AdminLists/UserProfile';
 import UserEditForm from './components/AdminLists/UserEditForm';
 import ToursListByOrganizer from './components/TourOperator/ToursListByOrganizer';
 import ToursListPerUser from './components/AdminLists/ToursListPerUser';
+import HikersListPerTour from './components/AdminLists/HikersListPerTour';
 
 
 
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/organizersList/:orgId" component={SingleTourOperator}></Route>
           <Route exact path="/myTours/:orgId" component={ToursListPerOrganizer}></Route>
           <Route exact path="/myTours/toursList/:id" component={TourForm}></Route>
+          <Route exact path="/myTours/hikersList/:tourId" component={HikersListPerTour}></Route>
           <Route exact path="/hikerTours" component={ToursListPerUser}></Route>
           <Route exact path="/organizer/:authOrgId" component={SingleTourOperatorAuth}></Route>
           <Route exact path="/organizer/:authOrgId/EditOrganizer" component={OrganizerEditForm}></Route>

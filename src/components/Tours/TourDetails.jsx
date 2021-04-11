@@ -19,8 +19,6 @@ const TourDetails = (props) => {
     const regHikerData = useSelector(state =>state.registerHikerToTour);
     const {hiker, success} = regHikerData;
 
-    const singleTourData = useSelector(state =>state.fetchTourDetails);
-
     const [userId, setUserId] = useState();
     const [successReg, setSuccessReg] = useState(false);
     console.log("userInfo", userInfo._id);

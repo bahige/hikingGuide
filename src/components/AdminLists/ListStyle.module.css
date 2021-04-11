@@ -31,9 +31,12 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
-.deleteButton {
+.deleteButton,
+.editButton,
+.hikersButton {
   background-color: var(--alarmMessageColor);
   padding: 10px;
   color: var(--primaryFontColor);
@@ -41,16 +44,15 @@
   border-radius: 5px;
   flex: 1;
   margin: 5px;
+  width: 75px;
 }
 
 .editButton {
   background-color: var(--secondaryColor);
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  color: var(--primaryFontColor);
-  flex: 1;
-  margin: 5px;
+}
+
+.hikersButton {
+  background-color: var(--registerButtonColor);
 }
 
 .createButtonRow {
@@ -142,4 +144,28 @@
   padding: 0 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.titleRow {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin: auto;
+  font-weight: bold;
+  font-size: var(--mainTitleFontSize);
+  text-decoration: underline;
+}
+
+.headingRow {
+  width: 95vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: bold;
+  font-size: var(--titleFontSize);
+  text-decoration: underline;
 }
