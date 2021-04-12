@@ -9,10 +9,11 @@ import Footer from './components/Footer/Footer';
 import ChangeHikerPassword from './components/ChangePassword/ChangeHikerPassword';
 import ChangeOrganizerPassword from './components/ChangePassword/ChangeOrganizerPassword';
 import ToursList from './components/Tours/ToursList';
-import ToursDetails from './components/Tours/TourDetails';
 
 import { Provider } from "react-redux";
-import store from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
+// import store from './redux/store';
+
 import TourDetails from './components/Tours/TourDetails';
 import TourForm from './components/TourForm/TourForm';
 import AdminToursList from './components/AdminLists/AdminToursList';
@@ -29,13 +30,19 @@ import ToursListByOrganizer from './components/TourOperator/ToursListByOrganizer
 import ToursListPerUser from './components/AdminLists/ToursListPerUser';
 import HikersListPerTour from './components/AdminLists/HikersListPerTour';
 
+import {ConfigureStore} from './redux/configureStore'
 
 
 function App() {
+
+  const {store, persistor} = ConfigureStore();
+
   return (
 
 <BrowserRouter>
   <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+
     <div className="App">
        <Header></Header>
         <Switch>
@@ -68,6 +75,7 @@ function App() {
         </Switch>
        <Footer></Footer>
     </div>
+    </PersistGate>
   </Provider>    
 </BrowserRouter>
 
