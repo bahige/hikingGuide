@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import ListStyle from './ListStyle.module.css';
 import {useHistory} from 'react-router-dom';
-import { getSingleTourOrganizer, getSingleTourOrganizerAuth } from '../../redux/organizer/organizerActions';
+import { getSingleTourOrganizer } from '../../redux/organizer/organizerActions';
 
 
 const SingleTourOperatorAuth = (props) => {
@@ -12,8 +12,7 @@ const SingleTourOperatorAuth = (props) => {
     const signinData = useSelector(state => state.singleTourOrganizer);
     const {loading, organizer, error} = signinData;
     const updatedOrganizer = useSelector(state => state.updateOrganizer);
-    const {loading: loadingUpdate, organizer: organizerUpdated, success, error: errUpdate} = updatedOrganizer;
-    console.log("hello", props.match.params.authOrgId); 
+    const { success} = updatedOrganizer;
 
     const dispatch = useDispatch();
 

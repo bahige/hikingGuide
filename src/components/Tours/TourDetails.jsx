@@ -40,9 +40,6 @@ const TourDetails = (props) => {
         dispatch(addHikerToTour(props.match.params.id, {user: userId}));
     }
 
-    const checkTourDateConflict = () => {
-        console.log("date conflict", toursReserved.some(tourReserved => tourReserved.date === tour.date ));
-    }
 
     return (
 
@@ -66,7 +63,7 @@ const TourDetails = (props) => {
                     !(tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id)) &&
                     toursReserved.some(tourReserved => tourReserved.date === tour.date ) ? 
                     <div className={DetailsStyle.warningMsg}> This Hike's Date is in Conflict with the date of a hike you previously reserved!</div>
-                    : null } '
+                    : null }
                    
                    {isAuthenticated ? 
                     <button className={DetailsStyle.reserveButton}

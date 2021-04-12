@@ -82,7 +82,6 @@ const TourForm = (props) => {
     useEffect(() => {
         handleTourId();
         dispatch(singleTourDetails(tourId))
-        console.log("tourId", tourId)
 
     }, [])
 
@@ -151,13 +150,11 @@ const TourForm = (props) => {
 
     const handleDistrict = (dist) =>{
         setDistrict(dist);
-        console.log("district from tourForm",district);
     }
 
 
     const handleGovernorate = (gov) =>{
         setGovernorate(gov);
-        console.log("gov from tourForm",governorate);
     }
 
     const handleDistanceFromMeetingVenue = (distance) =>{

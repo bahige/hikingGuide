@@ -4,11 +4,6 @@ import OrganizerRegisterForm from './OrganizerRegisterForm'
 
 const OrganizerRegisterContainer = () => {
 
-    const dateOfBirth = new Date(1983,8,5);
-    const today = new Date();
-    const age = today.getFullYear() - dateOfBirth.getFullYear()
-
-    console.log('age',age);
 
     return (
         <div className={RegisterFormStyle.orgRegContainer}>

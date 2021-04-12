@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleTourOrganizer, getSingleTourOrganizerAuth } from '../../redux/organizer/organizerActions';
+import { getSingleTourOrganizer } from '../../redux/organizer/organizerActions';
 import ListStyle from './ListStyle.module.css';
 
 

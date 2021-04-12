@@ -37,7 +37,6 @@ const AdminTourOrganizersList = () => {
     const deleteHandler = () => {
         dispatch(deleteTourOrganizer(tourOrganizerId));
         setModalVisible(false);
-        console.log("tour organizer", tourOrganizerId);
     }
 
 

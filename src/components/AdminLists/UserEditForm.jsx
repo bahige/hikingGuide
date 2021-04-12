@@ -49,7 +49,6 @@ const UserEditForm = (props) => {
       let currentYear = new Date().getFullYear();
       const age = currentYear - yOB;
       setAge(age);
-      console.log("age", age);
     }
 
     const handleGender = (e) => {
@@ -114,7 +113,6 @@ const submitHandler = (e) => {
 
                 <input  className={FormStyle.input} type="date" 
                 placeholder="Date of Birth" name="Date of Birth" 
-                // onChange={(e)=> { setDateOfBirth(e.target.value); console.log(e.target.name); console.log(e.target.valueAsDate.getMonth())}}
                 onChange={(e) => {handleAge(e.target.valueAsDate)}}
                 />
 

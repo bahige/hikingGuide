@@ -4,7 +4,6 @@ import SingleTourRow from './SingleTourRow';
 import { listTours, showToursOfHiker} from '../../redux/tour/tourActions';
 import ListStyle from './ListStyle.module.css';
 import Pagination from '../Pagination/Pagination';
-import {Link} from 'react-router-dom';
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -14,12 +13,7 @@ const ToursListPerUser = (props) => {
 
     const toursData = useSelector(state => state.fetchToursByHiker);
     const {loading, tours, error, limit, count} = toursData;
-    console.log("data", toursData);
 
-
-    const signinData = useSelector(state=> state.signinUser);
-    const {loading: loadingSignIn, userInfo} = signinData;
-    console.log("userInfo", userInfo);
 
     const [postsPerPage, setPostsPerPage] = useState(limit);
     const [currentPage, setCurrentPage] = useState(1);

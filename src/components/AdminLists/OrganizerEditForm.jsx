@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FormStyle from'../HikerRegisterForm/RegisterFormStyle.module.css';
 import GovernorateSelect from '../GovernorateSelect';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerOrganizer, getSingleTourOrganizer, updateTourOrganizer } from '../../redux/organizer/organizerActions';
+import {getSingleTourOrganizer, updateTourOrganizer } from '../../redux/organizer/organizerActions';
 import { useHistory } from 'react-router';
 
 const OrganizerEditForm = (props) => {

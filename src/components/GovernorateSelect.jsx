@@ -65,14 +65,11 @@ const GovernorateSelect = (props) => {
       e.preventDefault();
       setSelectedGovOption(e.target.value);
       handleGovernorate(e.target.value)
-      console.log("governorate", e.target.value)
-
     };
 
     const handleDistrictChange = (e) => {
       e.preventDefault();
       handleDistrict(e.target.value);
-      console.log("district", e.target.value)
     };
 
 

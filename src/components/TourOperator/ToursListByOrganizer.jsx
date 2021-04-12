@@ -37,11 +37,9 @@ const ToursListByOrganizer = (props) => {
 
 
      const orgId = props.match.params.orgId;
-     console.log('orgId', orgId);
 
      const data = useSelector(state => state.toursOfTourOrganizer);
      const {loading,  error, tours, limit, count} = data;
-     console.log("data from tour list by organizer", data);
      const dispatch = useDispatch();
   
 
@@ -54,7 +52,6 @@ const ToursListByOrganizer = (props) => {
      const [governorate, setGovernorate] = useState("");
      const [hikingLevel, setHikingLevel] = useState("");
      const [date, setDate] = useState("");
-     console.log("date", date)
 
      const handlePageChange = (currentPage) =>{
          setCurrentPage(currentPage);

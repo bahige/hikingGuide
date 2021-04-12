@@ -39,7 +39,6 @@ const ToursList = (props) => {
      const {loading, error, tours, limit, count} = data;
 
      const dispatch = useDispatch();
-     console.log("limit", limit);
   
 
      //For Pagination
@@ -51,7 +50,6 @@ const ToursList = (props) => {
      const [governorate, setGovernorate] = useState("");
      const [hikingLevel, setHikingLevel] = useState("");
      const [date, setDate] = useState("");
-     console.log("date", date)
 
      const handlePageChange = (currentPage) =>{
          setCurrentPage(currentPage);

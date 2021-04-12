@@ -4,7 +4,6 @@ import SingleTourRow from './SingleTourRow';
 import {deleteTourByAdmin, listTours} from '../../redux/tour/tourActions';
 import ListStyle from './ListStyle.module.css';
 import Pagination from '../Pagination/Pagination';
-import {Link} from 'react-router-dom';
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -45,7 +44,6 @@ const AdminToursList = () => {
     const deleteHandler = () =>{
         dispatch(deleteTourByAdmin(tourId));
         setModalVisible(false);
-        console.log("tour", tourId);
     }
 
     const [tourOperator, setTourOperator] = useState("Lebanese International Hikes");
@@ -56,7 +54,6 @@ const AdminToursList = () => {
             const openModal = (tourId) => {
                 setModalVisible(true);
                 setTourId(tourId);
-                console.log("tour", tourId);
             }
         
             const customStyles = {

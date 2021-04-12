@@ -47,7 +47,6 @@ const HikerRegisterForm = () => {
         let currentYear = yOB!== null ? new Date().getFullYear() : Date.now();
         const age = currentYear - yOB;
         setAge(age);
-        console.log("age", age);
       }
 
       const registerHandler = (e) =>{

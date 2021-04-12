@@ -8,9 +8,6 @@ const TourOrganizerCard = (props) => {
 
     const {tourOperatorId, title, profileImage}= props;
 
-        const marginingLeft = {
-            marginLeft :'5px'
-        }
 
     return (
         <div className={TourStyles.tourOrganizerCard} key={tourOperatorId}> 

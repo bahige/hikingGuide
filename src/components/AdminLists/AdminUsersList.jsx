@@ -18,7 +18,6 @@ const AdminUsersList = () => {
 
     const deletedUserData = useSelector(state=> state.userDelete);
     const { success: deleteSuccess} = deletedUserData;
-    console.log("deleteSuccess", deleteSuccess);
 
     const dispatch = useDispatch();
 

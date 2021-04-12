@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from '../../hikeguide.png';
 import logo from '../../assets/images/hikeguide.png';
 import appleStore from '../../assets/images/app-store.png';
 import playStore from '../../assets/images/play-store.png';

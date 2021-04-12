@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-// import image from '../../assets/images/bkassine.jpg';
 import TourStyles from './Tours.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //icons

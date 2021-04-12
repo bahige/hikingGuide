@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import SingleTourRow from './SingleTourRow';
-import {deleteTourByTourOrganizer, listTours, listToursByOrganizer} from '../../redux/tour/tourActions';
+import { listTours, listToursByOrganizer} from '../../redux/tour/tourActions';
 import ListStyle from './ListStyle.module.css';
 import Pagination from '../Pagination/Pagination';
-import {Link} from 'react-router-dom';
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
@@ -45,7 +44,6 @@ const ToursListPerOrganizer = (props) => {
     const deleteHandler = () =>{
         // dispatch(deleteTourByTourOrganizer(tourId));
         setModalVisible(false);
-        console.log("tourId",tourId);
     }
 
     const searchHandler = (e) => {
@@ -62,7 +60,6 @@ const ToursListPerOrganizer = (props) => {
             const openModal = (tourId) => {
                 setModalVisible(true);
                 setTourId(tourId);
-                console.log("tourId",tourId);
             }
         
             const customStyles = {
