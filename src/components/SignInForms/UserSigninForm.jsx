@@ -87,7 +87,7 @@ const SignInForm = (props) => {
 
                 {loading && <div>Loading...</div>}
                 {error && error.message.includes("status code 401") && (
-                    <div className="alert">
+                    <div className={SignInFormStyle.alarm}>
                         Either email or password are incorrect
                     </div> )}
 

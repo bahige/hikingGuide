@@ -37,11 +37,3 @@ code {
   --labelFontSize: 13px;
   --labelTitleFontSize: 24px;
 }
-
-.alarm {
-  color: var(--alarmMessageColor);
-  font-size: 10px;
-  align-self: flex-start;
-  margin-left: 30px;
-  margin-bottom: 12px;
-}

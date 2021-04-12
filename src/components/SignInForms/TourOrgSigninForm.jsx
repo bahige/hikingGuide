@@ -16,7 +16,6 @@ const SignInForm = (props) => {
 
     const [organizerEmail, setOrganizerEmail] = useState();
     const [organizerPassword, setOrganizerPassword] = useState();
-    const [authenticated, setAuthenticated] = useState(false);
 
     const [emailErrors, setEmailErrors] = useState("");
     const [passwordErrors, setPasswordErrors] = useState("");
@@ -83,7 +82,7 @@ const SignInForm = (props) => {
 
                 {loading && <div>Loading...</div>}
                 {orgError && orgError.message.includes("status code 401") && (
-                    <div className="alert">
+                    <div className={SignInFormStyle.alarm}>
                         Either email or password are incorrect
                     </div> )}
 
