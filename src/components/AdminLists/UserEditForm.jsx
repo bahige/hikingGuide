@@ -26,6 +26,9 @@ const UserEditForm = (props) => {
 
     const userData = useSelector(state => state.signinUser);
     const {loading, userInfo, error} =userData;
+    const updatedUserData = useSelector(state => state.userUpdate);
+    const {success} =updatedUserData;
+
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -41,7 +44,7 @@ const UserEditForm = (props) => {
       setPassword(userInfo.password);
       setGender(userInfo.gender);
       setAge(userInfo.age); 
-    }, [])    
+    }, [success])    
   
     
     const handleAge =(date) => {

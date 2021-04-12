@@ -3,6 +3,7 @@ import {combineReducers} from 'redux';
 import {singleTourReducer, createOrUpdateTourReducer, deleteTourByAdminReducer, tourListByOrganizerReducer,
 deleteTourByTourOrganizerReducer, listToursReducer, addHikerToTourReducer, hikerToursReducer} from './tour/tourReducer';
 import {deleteUserReducer, listUsersReducer, registerUserReducer, signinUserReducer,
+    singleUserReducer,
 updateUserReducer} from './user/userReducer';
 import {deleteTourOrganizerReducer, getSingleTourOrganizerReducer, 
 listTourOrganizersReducer, registerOrganizerReducer, signinOrganizerReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     usersList: listUsersReducer,
     userDelete: deleteUserReducer,
     userUpdate: updateUserReducer,
+    singleUser: singleUserReducer,
     //Organizers:
     regOrganizer: registerOrganizerReducer,
     signinOrg: signinOrganizerReducer,

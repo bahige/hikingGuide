@@ -1,4 +1,4 @@
-import { DELETE_USER_FAILURE, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, LIST_USERS_FAILURE, LIST_USERS_REQUEST, LIST_USERS_SUCCESS, REGISTER_USER_FAILURE, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, SIGNIN_USER_FAILURE, SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNOUT_USER, UPDATE_USER_FAILURE, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "./userActionTypes";
+import { DELETE_USER_FAILURE, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, FETCH_SINGLE_USER_FAILURE, FETCH_SINGLE_USER_REQUEST, FETCH_SINGLE_USER_SUCCESS, LIST_USERS_FAILURE, LIST_USERS_REQUEST, LIST_USERS_SUCCESS, REGISTER_USER_FAILURE, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, SIGNIN_USER_FAILURE, SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNOUT_USER, UPDATE_USER_FAILURE, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "./userActionTypes";
 
 
 
@@ -77,6 +77,19 @@ export const updateUserReducer = (state={}, action) => {
             return { loading: false, userInfo: action.payload, success: true };
         case UPDATE_USER_FAILURE:
             return {loading:false, userInfo:{}, error:action.payload};
+        default:
+            return state;
+    }
+}
+
+export const singleUserReducer = (state={user: {}}, action) =>{
+    switch(action.type){
+        case FETCH_SINGLE_USER_REQUEST:
+            return {...state, loading:true};
+        case FETCH_SINGLE_USER_SUCCESS:
+            return {loading:false, user: action.payload, error:""};
+        case FETCH_SINGLE_USER_FAILURE:
+            return {loading:false, user:{}, error:action.payload};
         default:
             return state;
     }
