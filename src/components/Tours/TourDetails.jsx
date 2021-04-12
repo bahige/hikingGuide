@@ -10,17 +10,20 @@ const TourDetails = (props) => {
     
     const tourData = useSelector(state => state.fetchTourDetails);
     const {loading, tour, error} = tourData; 
-    const dispatch = useDispatch();
-    console.log("tour operator", tour);
+    const toursData = useSelector(state => state.fetchTours);
+    const {tours} =toursData;
 
     const signinData = useSelector(state => state.signinUser);
     const { userInfo, isAuthenticated } =signinData;
 
     const regHikerData = useSelector(state =>state.registerHikerToTour);
-    const {hiker, success} = regHikerData;
+    const { success } = regHikerData;
+
+    const dispatch = useDispatch();
 
     const [userId, setUserId] = useState();
-    const [successReg, setSuccessReg] = useState(false);
+    const toursReserved = tours.filter(tour => tour.hikers.some(hiker => hiker._id === userInfo._id));
+
     
 
     
@@ -30,17 +33,16 @@ const TourDetails = (props) => {
         if(userInfo){
         setUserId(userInfo._id);
         }
-        // setSuccessReg(false);
-    }, [])
+    }, [success])
 
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(addHikerToTour(props.match.params.id, {user: userId}));
-        setSuccessReg(success);
-
     }
 
-
+    const checkTourDateConflict = () => {
+        console.log("date conflict", toursReserved.some(tourReserved => tourReserved.date === tour.date ));
+    }
 
     return (
 
@@ -60,15 +62,24 @@ const TourDetails = (props) => {
 
                 <div className={DetailsStyle.detailsRow}>
                     <div className={DetailsStyle.hostTag}><b><u>Host: {tour && tour.tourOperator && tour.tourOperator.name}</u></b>  </div>
+                    {isAuthenticated &&  
+                    !(tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id)) &&
+                    toursReserved.some(tourReserved => tourReserved.date === tour.date ) ? 
+                    <div className={DetailsStyle.warningMsg}> This Hike's Date is in Conflict with the date of a hike you previously reserved!</div>
+                    : null } '
+                   
                    {isAuthenticated ? 
                     <button className={DetailsStyle.reserveButton}
                      onClick={submitHandler}
-                     disabled={successReg}> {successReg ? "Reserved" : "Reserve Hike"} </button>
+                     disabled={tour && tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id)
+                     || toursReserved.some(tourReserved => tourReserved.date === tour.date )}> 
+                     {tour && tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id) ? "Reserved" : 
+                     toursReserved.some(tourReserved => tourReserved.date === tour.date ) ? "Cannot Be Reserved!"
+                     :"Reserve Hike"} </button>
                     : null } 
                 </div>
 
             </div>
-
             <hr/>
 
         {/* ////////////////////////////////////////// Hiking Details Portion////////////////////////////////////////// */}

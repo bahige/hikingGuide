@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import SingleTourRow from './SingleTourRow';
-import {deleteTourByTourOrganizer, listTours, listToursByOrganizer, showToursOfHiker} from '../../redux/tour/tourActions';
+import { listTours, showToursOfHiker} from '../../redux/tour/tourActions';
 import ListStyle from './ListStyle.module.css';
 import Pagination from '../Pagination/Pagination';
 import {Link} from 'react-router-dom';
@@ -27,9 +27,8 @@ const ToursListPerUser = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // if(organizer){
-        dispatch(showToursOfHiker());
-    }, []);
+        dispatch(showToursOfHiker(currentPage, postsPerPage));
+    }, [currentPage, postsPerPage]);
 
 
 

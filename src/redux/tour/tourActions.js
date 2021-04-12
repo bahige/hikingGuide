@@ -132,7 +132,8 @@ export const addHikerToTourRequest= (tourId) => {
 }
 
 export const addHikerToTourSuccess = (data) => {
-    return {type: ADD_HIKER_TO_TOUR_SUCCESS, hiker: data.hiker, success: data.success};
+    return {type: ADD_HIKER_TO_TOUR_SUCCESS, hiker: data.hiker, 
+            message: data.message, success: data.success};
 }
 
 export const addHikerToTourFailure = (error) => {

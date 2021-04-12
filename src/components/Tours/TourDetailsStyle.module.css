@@ -91,7 +91,7 @@
   color: var(--primaryFontColor);
   background-color: var(--primaryColor);
   padding: 5px 10px;
-  width: 150px;
+  min-width: 150px;
   height: 40px;
   font-size: var(--titleFontSize);
   font-weight: bold;
@@ -139,6 +139,15 @@
   height: auto;
   /* overflow-y: scroll; */
   line-height: 1.6;
+}
+
+.warningMsg {
+  color: var(--alarmMessageColor);
+  font-weight: bold;
+  border: solid 1px var(--alarmMessageColor);
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 50);
 }
 /***************************Responsiveness for tablets**************************/
 
