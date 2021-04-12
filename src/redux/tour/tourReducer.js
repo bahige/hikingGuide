@@ -52,11 +52,11 @@ export const singleTourReducer = (state={tour: {}}, action) =>{
 export const addHikerToTourReducer = (state={}, action) =>{
     switch(action.type){
         case ADD_HIKER_TO_TOUR_REQUEST:
-            return {loading:true, successAdd:false};
+            return {loading:true, success:false};
         case ADD_HIKER_TO_TOUR_SUCCESS:
-            return {loading:false, hiker: action.hiker, message: action.message, success: action.success};
+            return {loading:false, hiker: action.hiker, message: action.message, success: true};
         case ADD_HIKER_TO_TOUR_FAILURE:
-            return {loading:false, error:action.payload, successAdd:false};
+            return {loading:false, error:action.payload, success:false};
         default:
             return state;
     }

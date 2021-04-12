@@ -132,8 +132,7 @@ export const addHikerToTourRequest= (tourId) => {
 }
 
 export const addHikerToTourSuccess = (data) => {
-    return {type: ADD_HIKER_TO_TOUR_SUCCESS, hiker: data.hiker, 
-            message: data.message, success: data.success};
+    return {type: ADD_HIKER_TO_TOUR_SUCCESS, hiker: data.hiker };
 }
 
 export const addHikerToTourFailure = (error) => {
@@ -145,7 +144,6 @@ export const addHikerToTour = (tourId, user) => async (dispatch) => {
       dispatch(addHikerToTourRequest(tourId));
       const { data } = await axios.post(`${url}/${tourId}/hikers`, user,  
       {headers: userAuthHeader()});
-      console.log("hiker to add", user);
       dispatch(addHikerToTourSuccess(data));
     } catch (error) {
       dispatch( addHikerToTourFailure(error));

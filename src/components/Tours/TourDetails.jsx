@@ -4,7 +4,9 @@ import TourDetailsGallery from './TourDetailsGallery';
 import {addHikerToTour, singleTourDetails} from '../../redux/tour/tourActions';
 import { useDispatch, useSelector } from 'react-redux';
 import Moment from 'react-moment';
+import Modal from "react-modal";
 
+Modal.setAppElement("#root");
 
 const TourDetails = (props) => {
     
@@ -33,13 +35,34 @@ const TourDetails = (props) => {
         if(userInfo){
         setUserId(userInfo._id);
         }
+        setModalVisible(false);
     }, [success])
 
-    const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = () => {
         dispatch(addHikerToTour(props.match.params.id, {user: userId}));
     }
 
+/////////////////////////////////////////////////Modal Styling and Functions///////////////////////////////////////////////////////
+                
+        const [modalVisible, setModalVisible] = useState(false);
+
+                const openModal = (e) => {
+                    e.preventDefault();
+                    setModalVisible(true);
+                }
+            
+                const customStyles = {
+                    content : {
+                      top                   : '50%',
+                      left                  : '50%',
+                      right                 : 'auto',
+                      bottom                : 'auto',
+                      marginRight           : '-50%',
+                      transform             : 'translate(-50%, -50%)'
+                    }
+                  };
+            
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
 
@@ -67,13 +90,27 @@ const TourDetails = (props) => {
                    
                    {isAuthenticated ? 
                     <button className={DetailsStyle.reserveButton}
-                     onClick={submitHandler}
+                    //  onClick={submitHandler}
+                    onClick={openModal}
                      disabled={tour && tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id)
                      || toursReserved.some(tourReserved => tourReserved.date === tour.date )}> 
                      {tour && tour.hikers && tour.hikers.some((hiker)=>hiker._id === userInfo._id) ? "Reserved" : 
                      toursReserved.some(tourReserved => tourReserved.date === tour.date ) ? "Cannot Be Reserved!"
                      :"Reserve Hike"} </button>
                     : null } 
+
+                <Modal isOpen={modalVisible} 
+                    onRequestClose={()=>setModalVisible(false)}
+                    style={customStyles}>
+                    <div className={DetailsStyle.modal}>
+                        <div> Are you sure you want to register to this hike? </div>
+                        <div className={DetailsStyle.buttonsContainer}>
+                            <button className={DetailsStyle.editButton} onClick={submitHandler}> Register </button>
+                            <button className={DetailsStyle.deleteButton} onClick={()=> setModalVisible(false)}> Cancel </button>
+                        </div>
+                    </div>
+                </Modal>
+
                 </div>
 
             </div>
