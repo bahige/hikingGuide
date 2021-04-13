@@ -144,7 +144,7 @@ async (dispatch) => {
         dispatch(updateUserRequest({userId, firstName, lastName, email, password, age, gender}));
         const data = await axios.patch(`${url}/${userId}`, 
         {userId, firstName, lastName, email, password, age, gender}, 
-        {headers: userAuthHeader()});
+        {headers: userAuthHeader(), withCredentials:true});
         dispatch(updateUserSuccess(data));
         localStorage.setItem("userInfo", JSON.stringify(data));
 

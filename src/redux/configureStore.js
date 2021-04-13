@@ -13,6 +13,7 @@ export const ConfigureStore = () => {
 const persistConfig = {
   key: 'root',
   storage,
+  // whitelist: ['signinUser', 'regUser', 'signinOrg', 'regOrganizer' ]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
