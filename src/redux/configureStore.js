@@ -8,6 +8,11 @@ import {persistReducer, persistStore} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 
+const userInfo = JSON.parse(localStorage.getItem('userInfo')) || null;
+const orgInfo = JSON.parse(localStorage.getItem('orgInfo')) || null;
+const initialState = { orgSignin: { orgInfo }, userSignin: { userInfo } };
+
+
 export const ConfigureStore = () => {
 
 const persistConfig = {
@@ -18,7 +23,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-const store = createStore(persistedReducer,  composeWithDevTools(applyMiddleware(logger, thunk)));
+const store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(logger, thunk)));
 
 const persistor = persistStore(store);
 

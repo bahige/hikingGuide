@@ -3,10 +3,10 @@ import { SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNIN_USER_FAILURE, SIGNOUT_
         REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
          LIST_USERS_REQUEST, LIST_USERS_SUCCESS, LIST_USERS_FAILURE, DELETE_USER_REQUEST, DELETE_USER_SUCCESS, DELETE_USER_FAILURE, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE, FETCH_SINGLE_USER_REQUEST, FETCH_SINGLE_USER_SUCCESS, FETCH_SINGLE_USER_FAILURE } from "./userActionTypes"
 import {authHeader, userAuthHeader} from '../authHeader';
-import { fetchSingleTourFailure } from "../tour/tourActions";
 
 
 const url = "http://localhost:3400/users";
+
 
 
 export const signinUserRequest = (email, password) => {
@@ -143,8 +143,8 @@ async (dispatch) => {
     try{ 
         dispatch(updateUserRequest({userId, firstName, lastName, email, password, age, gender}));
         const data = await axios.patch(`${url}/${userId}`, 
-        {userId, firstName, lastName, email, password, age, gender}, 
-        {headers: userAuthHeader(), withCredentials:true});
+        {userId, firstName, lastName, email, password, age, gender},
+        {headers: userAuthHeader()});
         dispatch(updateUserSuccess(data));
         localStorage.setItem("userInfo", JSON.stringify(data));
 

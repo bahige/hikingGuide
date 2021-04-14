@@ -15,9 +15,11 @@ const SingleTourRow = (props) => {
 
     const regOrgData= useSelector(state => state.regOrganizer);
     const orgSignin= useSelector(state => state.signinOrg);
+    const userSignin = useSelector(state=> state.signinUser);
 
     const{orgInfo} = orgSignin;
     const{orgInfo : orgInfo1} = regOrgData;
+    const{userInfo} = userSignin;
 
 
 
@@ -35,9 +37,10 @@ const SingleTourRow = (props) => {
                 <button className={ListStyle.editButton} type="submit">
                 <FontAwesomeIcon icon={faEdit}/> Edit </button>
                 </Link> : null}
+            {orgInfo || orgInfo1 || userInfo && userInfo.isAdmin ?
                 <Link>
                 <button className={ListStyle.deleteButton} type="submit" onClick={openDeleteModal}><FontAwesomeIcon icon={faTrash}/> Delete </button>
-                </Link>
+                </Link> : null }
             </div>
         </div>
     )

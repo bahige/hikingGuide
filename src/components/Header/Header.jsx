@@ -178,6 +178,12 @@ const Header = () => {
                         </li>
                         :null}
 
+                    {  userInfo1 && userInfo1.token ? 
+                        <li>
+                            <Link to={`/user/${userInfo1._id}`}>  <div> Profile </div>  </Link> 
+                        </li>
+                        :null}              
+
                         { userInfo && userInfo.token || userInfo1 && userInfo1.token  ? 
                         <li>
                             <Link to="/">  <div onClick={userSignOut}> Sign Out </div>  </Link> 

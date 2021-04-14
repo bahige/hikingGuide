@@ -1,3 +1,5 @@
+
+
 export const authHeader =()  => {
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -22,7 +24,6 @@ export const authHeader =()  => {
 
   export const orgAuthHeader =()  => {
     const tourOrganizer = JSON.parse(localStorage.getItem('orgInfo'));
-    console.log(tourOrganizer);
 
     if (tourOrganizer && tourOrganizer.token) {
       return { Authorization: 'Bearer ' + tourOrganizer.token };

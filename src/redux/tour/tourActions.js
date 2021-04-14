@@ -33,7 +33,6 @@ date="", page = 1, limit = 4) => async(dispatch)=> {
         dispatch(listToursRequest());
         const {data} = await axios.get(`${url}?searchKeyword=${searchKeyword}&governorate=${governorate}&hikingLevel=${hikingLevel}&date=${date}&page=${page}&limit=${limit}`);
         dispatch(listToursSuccess(data))
-        console.log("tour_data", data)
 
     } catch(error){
         dispatch(listToursFailure(error))
